@@ -1,0 +1,32 @@
+sudo: required
+
+language: python
+
+jobs:
+  include:
+    - os: linux
+      arch: arm64
+      python: "3.6"
+    - os: linux
+      arch: arm64
+      python: "3.7"
+    - os: linux
+      arch: arm64
+      python: "3.8"
+
+services:
+- docker
+
+before_install:
+  - python -m pip install -r build-requirements.txt
+  - python -m pip install wheel
+  - pip install -U pip cibuildwheel==1.4.2 cython
+  
+script:
+  - cd sdks/python
+  - python setup.py sdist --formats=zip
+  - file=$(ls | grep .zip | head -n 1
+  - sha512sum $file > ${file}.sha512
+  - unzip dist/$(ls dist | grep .zip | head -n 1)
+  - mv $(ls | grep apache-beam) apache-beam-source
+  - cibuildwheel --print-build-identifiers && cibuildwheel --output-dir wheelhouse  
