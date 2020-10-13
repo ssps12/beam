@@ -29,6 +29,7 @@ services:
 env:
   global:
     - CIBW_SKIP: cp35-manylinux_aarch64
+    - CIBW_MANYLINUX_AARCH64_IMAGE: manylinux2014
 
 before_install:
   - cd sdks/python
