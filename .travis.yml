@@ -18,6 +18,7 @@ services:
 - docker
 
 before_install:
+  - cd sdks/python
   - python -m pip install -r build-requirements.txt
   - python -m pip install wheel
   - pip install -U pip cibuildwheel==1.4.2 cython
