@@ -45,5 +45,6 @@ script:
   - unzip dist/$(ls dist | grep .zip | head -n 1)
   - mv $(ls | grep apache-beam) apache-beam-source
   - cibuildwheel --print-build-identifiers && cibuildwheel --output-dir wheelhouse  
-  - cd wheelhouse
+  - python setup.py bdist_wheel 
+  - cd dist
   - ls
