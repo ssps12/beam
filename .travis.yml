@@ -5,7 +5,10 @@ language: python
 jobs:
   include:
     - os: linux
-      arch: arm64
+      dist: focal
+      group: edge
+      arch: arm64-graviton2
+      virt: vm
       python: "3.6"
     - os: linux
       dist: focal
@@ -23,12 +26,16 @@ jobs:
 services:
 - docker
 
+env:
+  global:
+    - CIBW_SKIP: cp35-manylinux_aarch64
+
 before_install:
   - cd sdks/python
   - python -m pip install -r build-requirements.txt
   - python -m pip install wheel
   - pip install -U pip cibuildwheel==1.4.2 cython
-  - pip install protobuf
+  - pip install protobuf google google-cloud
   
 script:
   - python setup.py sdist --formats=zip
