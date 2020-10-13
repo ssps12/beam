@@ -5,14 +5,16 @@ language: python
 jobs:
   include:
     - os: linux
-      arch: arm64-graviton2
+      arch: arm64
       python: "3.6"
     - os: linux
       arch: arm64-graviton2
+      virt: vm
       python: "3.7"
     - os: linux
       arch: arm64-graviton2
       python: "3.8"
+      virt: vm
 
 services:
 - docker
