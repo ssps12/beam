@@ -35,9 +35,9 @@ before_install:
   - python -m pip install -r build-requirements.txt
   - python -m pip install wheel
   - pip install -U pip cibuildwheel==1.4.2 cython
-  - pip install protobuf google google-cloud
   
 script:
+  - pip install protobuf google google-cloud
   - python setup.py sdist --formats=zip
   - file=$(ls | grep .zip | head -n 1)
   #- sha512sum $file > ${file}.sha512
