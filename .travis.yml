@@ -24,7 +24,6 @@ before_install:
   - pip install -U pip cibuildwheel==1.4.2 cython
   
 script:
-  - cd sdks/python
   - python setup.py sdist --formats=zip
   - file=$(ls | grep .zip | head -n 1
   - sha512sum $file > ${file}.sha512
