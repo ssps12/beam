@@ -39,6 +39,7 @@ before_install:
 script:
   - pip install protobuf google google-cloud
   - python setup.py sdist --formats=zip
+  - python setup.py sdist --formats=zip
   - file=$(ls | grep .zip | head -n 1)
   #- sha512sum $file > ${file}.sha512
   - unzip dist/$(ls dist | grep .zip | head -n 1)
