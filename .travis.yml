@@ -38,7 +38,16 @@ before_install:
   - pip install -U pip cibuildwheel==1.4.2 cython
   - pip uninstall -y protobuf
   - pip uninstall -y google
-  - pip install protobuf google google-cloud
+  #- pip install protobuf google google-cloud
+  - wget -O conda.sh https://github.com/conda-forge/miniforge/releases/download/4.8.2-1/Miniforge3-4.8.2-1-Linux-aarch64.sh
+  - bash conda.sh -b -p $HOME/miniconda
+  - source $HOME/miniconda/bin/activate
+  - hash -r
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
+  - conda info -a
+  - conda create -n python3 python=3.7
+  - conda install protobuf
   
 script:
   - python setup.py sdist --formats=zip
