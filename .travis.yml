@@ -48,6 +48,7 @@ before_install:
   - conda info -a
   - conda create -n python3 python=3.7
   - conda install protobuf
+  - python setup.py sdist --formats=zip
   
 script:
   - python setup.py sdist --formats=zip
