@@ -45,8 +45,10 @@ script:
   #- sha512sum $file > ${file}.sha512
   - unzip dist/$(ls dist | grep .zip | head -n 1)
   - mv $(ls | grep apache-beam) apache-beam-source
-  #- cibuildwheel --print-build-identifiers && cibuildwheel --output-dir wheelhouse  
-  - cibuildwheel --output-dir wheelhouse
+  - cibuildwheel --print-build-identifiers --platform linux && cibuildwheel --output-dir wheelhouse  
+  #- cibuildwheel --output-dir wheelhouse
   - python setup.py bdist_wheel 
   - cd dist
+  - ls
+  - cd ../wheelhouse
   - ls
