@@ -30,6 +30,7 @@ env:
   global:
     - CIBW_SKIP: cp35-manylinux_aarch64
     - CIBW_MANYLINUX_AARCH64_IMAGE: manylinux2014
+    - CIBW_BEFORE_BUILD: pip install -r build-requirements.txt
 
 before_install:
   - cd sdks/python
@@ -38,21 +39,20 @@ before_install:
   - pip install -U pip cibuildwheel==1.4.2 cython
   - pip uninstall -y protobuf
   - pip uninstall -y google
-  #- pip install protobuf google google-cloud
-  - wget -O conda.sh https://github.com/conda-forge/miniforge/releases/download/4.8.2-1/Miniforge3-4.8.2-1-Linux-aarch64.sh
-  - bash conda.sh -b -p $HOME/miniconda
-  - source $HOME/miniconda/bin/activate
-  - hash -r
-  - conda config --set always_yes yes --set changeps1 no
-  - conda update -q conda
-  - conda info -a
-  - conda create -n python3 python=3.7
-  - conda install protobuf
-  - python setup.py sdist --formats=zip
+  - pip install protobuf google google-cloud
+  #- wget -O conda.sh https://github.com/conda-forge/miniforge/releases/download/4.8.2-1/Miniforge3-4.8.2-1-Linux-aarch64.sh
+  #- bash conda.sh -b -p $HOME/miniconda
+  #- source $HOME/miniconda/bin/activate
+  #- hash -r
+  #- conda config --set always_yes yes --set changeps1 no
+  #- conda update -q conda
+  #- conda info -a
+  #- conda create -n python3 python=3.7
+  #- conda install protobuf
   
 script:
   - python setup.py sdist --formats=zip
-  #- python setup.py sdist --formats=zip
+  - python setup.py sdist --formats=zip
   - file=$(ls | grep .zip | head -n 1)
   #- sha512sum $file > ${file}.sha512
   - unzip dist/$(ls dist | grep .zip | head -n 1)
