@@ -36,9 +36,9 @@ before_install:
   - python -m pip install -r build-requirements.txt
   - python -m pip install wheel
   - pip install -U pip cibuildwheel==1.4.2 cython
-  - pip uninstall protobuf
-  - pip uninstall google
-  - pip install protobuf google google-cloud google-cloud-bigquery
+  - pip uninstall -y protobuf
+  - pip uninstall -y google
+  - pip install -y protobuf google google-cloud google-cloud-bigquery
   
 script:
   - python setup.py sdist --formats=zip
